@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="XamarinHomeApp.Pages.RegisterPage">
+    
+    <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
+        <Entry Placeholder="Your e-mail"
+               PlaceholderColor="LightGray"
+               HorizontalTextAlignment="Center"/>
+        <Button Text="Register"/>
+        <Label Text="Already have an account"
+               FontSize="Small"
+               Padding="40,10,40,10"
+               HorizontalTextAlignment="Center"
+               VerticalTextAlignment="Center"/>
+    </StackLayout>
+</ContentPage>

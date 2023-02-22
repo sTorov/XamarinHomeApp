@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace XamarinHomeApp
+namespace XamarinHomeApp.Pages
 {
     public partial class LoginPage : ContentPage
     {
