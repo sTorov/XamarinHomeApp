@@ -17,7 +17,7 @@
                 Clicked="LoginButton_Clicked"/>
         <Label x:Name="errorMessage"
                FontSize="Small"
-               TextColor="Red"
+               TextColor="{ext:ColorView R=255, G=0, B=0}"
                Padding="30,10,30,10"
                VerticalTextAlignment="Center"
                HorizontalTextAlignment="Center"/>
