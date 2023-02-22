@@ -2,8 +2,9 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:XamarinHomeApp.Pages"
+             xmlns:ext="clr-namespace:XamarinHomeApp.Templates"
              x:Class="XamarinHomeApp.Pages.LoginPage">
-
+    
     <StackLayout VerticalOptions="Center" HorizontalOptions="Center">
         <Label Text="HomeApp - Ваш умный дом" 
                FontSize="Title"
@@ -12,6 +13,7 @@
                HorizontalTextAlignment="Center"/>
         <Button x:Name="loginButton" 
                 Text="{x:Static local:LoginPage.BUTTON_TEXT}"
+                CornerRadius="{ext:ButtonView ButtonStyle=Round}"
                 Clicked="LoginButton_Clicked"/>
         <Label x:Name="errorMessage"
                FontSize="Small"

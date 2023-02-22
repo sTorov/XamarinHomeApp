@@ -3,13 +3,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="XamarinHomeApp.Pages.RegisterPage">
     
-    <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
+    <StackLayout HorizontalOptions="Center" VerticalOptions="Center" x:Name="stackLayout">
         <Entry Placeholder="Your e-mail"
-               PlaceholderColor="LightGray"
+               FontSize="Medium"
                HorizontalTextAlignment="Center"/>
-        <Button Text="Register"/>
+        <Button x:Name="registerButton"
+                Text="Register"/>
         <Label Text="Already have an account"
-               FontSize="Small"
+               FontSize="Medium"
                Padding="40,10,40,10"
                HorizontalTextAlignment="Center"
                VerticalTextAlignment="Center"/>
