@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="XamarinHomeApp.LoginPage">
+
+    <StackLayout VerticalOptions="Center" HorizontalOptions="Center">
+        <Label Text="HomeApp - Ваш умный дом" 
+               FontSize="Title"
+               Padding="30,10,30,10"
+               VerticalTextAlignment="Center"
+               HorizontalTextAlignment="Center"/>
+        <Button x:Name="loginButton" Text="Войти" Clicked="LoginButton_Clicked"/>
+    </StackLayout>
+</ContentPage>

@@ -11,7 +11,7 @@ namespace XamarinHomeApp
             //Инициализация интерфейса
             InitializeComponent();
             //Инициализация главного экрана
-            MainPage = new LoadingPage();  //new MainPage()
+            MainPage = new LoginPage();  //new MainPage() || new LoadingPage()
         }
 
         protected override void OnStart()
