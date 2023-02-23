@@ -39,6 +39,10 @@
                         Text="DevicesPage"
                         CornerRadius="{ext:ButtonView ButtonStyle=Round}"
                         Clicked="DevicesButton_Clicked"/>
+                <Button x:Name="climateButton" 
+                        Text="ClimatePage"
+                        CornerRadius="{ext:ButtonView ButtonStyle=Round}"
+                        Clicked="ClimateButton_Clicked"/>
             </StackLayout>
         </ScrollView>
     </StackLayout>
