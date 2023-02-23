@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:XamarinHomeApp.Pages"
+             xmlns:ext="clr-namespace:XamarinHomeApp.Templates"
+             x:Class="XamarinHomeApp.Pages.DevicesPage">
+    
+    <StackLayout BackgroundColor="LightGray">
+        <Label Text="HomeApp - Ваши устройтва"
+               HorizontalOptions="Center"
+               FontSize="Title"
+               Padding="30,10,30,10"/>
+        <ScrollView BackgroundColor="AliceBlue" x:Name="scrollView"></ScrollView>
+        <Button x:Name="backButton"
+                BackgroundColor="WhiteSmoke"
+                Text="Назад"
+                Clicked="BackButton_Clicked"/>
+    </StackLayout>
+</ContentPage>

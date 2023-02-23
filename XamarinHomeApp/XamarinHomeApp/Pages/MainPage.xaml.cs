@@ -55,5 +55,7 @@ namespace XamarinHomeApp.Pages
         private async void RegButton_Clicked(object sender, EventArgs e) => await Navigation.PushAsync(new RegisterPage());
 
         private async void RoomButton_Clicked(object sender, EventArgs e) => await Navigation.PushAsync(new RoomPage());
+
+        private async void DevicesButton_Clicked(object sender, EventArgs e) => await Navigation.PushAsync(new DevicesPage());
     }
 }

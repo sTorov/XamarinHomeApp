@@ -35,6 +35,10 @@
                         Text="RoomPage"
                         CornerRadius="{ext:ButtonView ButtonStyle=Round}"
                         Clicked="RoomButton_Clicked"/>
+                <Button x:Name="devicesButton" 
+                        Text="DevicesPage"
+                        CornerRadius="{ext:ButtonView ButtonStyle=Round}"
+                        Clicked="DevicesButton_Clicked"/>
             </StackLayout>
         </ScrollView>
     </StackLayout>
