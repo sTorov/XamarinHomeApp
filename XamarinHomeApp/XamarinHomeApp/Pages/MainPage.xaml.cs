@@ -49,5 +49,11 @@ namespace XamarinHomeApp.Pages
         //this.Content = text;
 
         #endregion
+
+        private async void LoginButton_Clicked(object sender, EventArgs e) => await Navigation.PushAsync(new LoginPage());
+
+        private async void RegButton_Clicked(object sender, EventArgs e) => await Navigation.PushAsync(new RegisterPage());
+
+        private async void RoomButton_Clicked(object sender, EventArgs e) => await Navigation.PushAsync(new RoomPage());
     }
 }

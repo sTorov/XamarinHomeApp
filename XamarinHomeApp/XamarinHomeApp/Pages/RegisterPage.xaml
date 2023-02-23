@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ext="clr-namespace:XamarinHomeApp.Templates"
              x:Class="XamarinHomeApp.Pages.RegisterPage">
     
     <StackLayout HorizontalOptions="Center" VerticalOptions="Center" x:Name="stackLayout">
@@ -8,7 +9,12 @@
                FontSize="Medium"
                HorizontalTextAlignment="Center"/>
         <Button x:Name="registerButton"
+                CornerRadius="{ext:ButtonView ButtonStyle=Round}"
                 Text="Register"/>
+        <Button x:Name="backButton" 
+                Text="Назад"
+                CornerRadius="{ext:ButtonView ButtonStyle=Round}"
+                Clicked="BackButton_Clicked"/>
         <Label Text="Already have an account"
                FontSize="Medium"
                Padding="40,10,40,10"

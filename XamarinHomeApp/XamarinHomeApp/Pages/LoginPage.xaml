@@ -5,7 +5,8 @@
              xmlns:ext="clr-namespace:XamarinHomeApp.Templates"
              x:Class="XamarinHomeApp.Pages.LoginPage">
     
-    <StackLayout VerticalOptions="Center" HorizontalOptions="Center">
+    <StackLayout VerticalOptions="Center" HorizontalOptions="Center"
+                 x:Name="stackLayout">
         <Label Text="HomeApp - Ваш умный дом" 
                FontSize="Title"
                Padding="30,10,30,10"
@@ -15,7 +16,11 @@
                 Text="{x:Static local:LoginPage.BUTTON_TEXT}"
                 CornerRadius="{ext:ButtonView ButtonStyle=Round}"
                 Clicked="LoginButton_Clicked"/>
-        <Label x:Name="errorMessage"
+        <Button x:Name="backButton" 
+                Text="Назад"
+                CornerRadius="{ext:ButtonView ButtonStyle=Round}"
+                Clicked="BackButton_Clicked"/>
+        <Label x:Name="infoMessage"
                FontSize="Small"
                TextColor="{ext:ColorView R=255, G=0, B=0}"
                Padding="30,10,30,10"

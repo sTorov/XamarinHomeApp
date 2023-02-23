@@ -16,5 +16,7 @@ namespace XamarinHomeApp.Pages
         {
             InitializeComponent();
         }
+
+        private async void BackButton_Clicked(object sender, EventArgs e) => await Navigation.PopAsync();
     }
 }

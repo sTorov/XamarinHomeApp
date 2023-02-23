@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:XamarinHomeApp.Pages"
+             xmlns:ext="clr-namespace:XamarinHomeApp.Templates"
              x:Class="XamarinHomeApp.Pages.RoomPage">
     
     <StackLayout HorizontalOptions="Center">
@@ -25,5 +26,8 @@
         
         <Button x:Name="addButton" Text="{x:Static local:RoomPage.ADD_BUTTON_TEXT}"
                 Clicked="AddButton_Clicked"/>
+        <Button x:Name="backButton" 
+                Text="Назад"
+                Clicked="BackButton_Clicked"/>
     </StackLayout>
 </ContentPage>
