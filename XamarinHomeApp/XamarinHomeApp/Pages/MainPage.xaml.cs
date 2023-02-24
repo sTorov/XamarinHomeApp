@@ -59,5 +59,7 @@ namespace XamarinHomeApp.Pages
         private async void DevicesButton_Clicked(object sender, EventArgs e) => await Navigation.PushAsync(new DevicesPage());
 
         private async void ClimateButton_Clicked(object sender, EventArgs e) => await Navigation.PushAsync(new ClimatePage());
+
+        private async void AboutButton_Clicked(object sender, EventArgs e) => await Navigation.PushAsync(new AboutPage());
     }
 }

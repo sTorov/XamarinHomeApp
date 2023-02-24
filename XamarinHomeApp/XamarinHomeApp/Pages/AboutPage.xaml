@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="XamarinHomeApp.Pages.AboutPage">
+    
+    <RelativeLayout x:Name="container">
+        <BoxView x:Name="boxView"
+                 WidthRequest="50"
+                 HeightRequest="50"
+                 Color="LightBlue"
+                 RelativeLayout.XConstraint=
+                 "{ConstraintExpression
+                        Type=RelativeToParent,
+                        Property=Width,
+                        Factor=0.5,
+                        Constant=-25}"
+                  RelativeLayout.YConstraint=
+                 "{ConstraintExpression
+                        Type=RelativeToParent,
+                        Property=Height,
+                        Factor=0.5,
+                        Constant=-25}"/>
+        <BoxView x:Name="boxView2"
+                 WidthRequest="50"
+                 HeightRequest="50"
+                 Color="Blue"
+                 RelativeLayout.XConstraint=
+                 "{ConstraintExpression
+                        ElementName=boxView,
+                        Type=RelativeToView,
+                        Property=X,
+                        Constant=100}"
+                  RelativeLayout.YConstraint=
+                 "{ConstraintExpression
+                        ElementName=boxView,
+                        Type=RelativeToView,
+                        Property=Y,
+                        Constant=0}"/>
+        <BoxView x:Name="boxView3"
+                 WidthRequest="50"
+                 HeightRequest="50"
+                 Color="DarkBlue"
+                 RelativeLayout.XConstraint=
+                 "{ConstraintExpression
+                        ElementName=boxView,
+                        Type=RelativeToView,
+                        Property=X,
+                        Constant=-100}"
+                  RelativeLayout.YConstraint=
+                 "{ConstraintExpression
+                        ElementName=boxView,
+                        Type=RelativeToView,
+                        Property=Y,
+                        Constant=0}"/>
+                <!-- 
+                    ElementName - имя элемента, относительно которого будет позиционироваться текущий элемент
+                    Type - относительно чего позиционировать X (Y) (конкретный элемент, родительский элемент)
+                    Property - относительно какого свойства выбранного элемента позиционировать X (Y)
+                    Factor - относительное значение величины выбранного свойства
+                    Constant - абсолютное значение смещения X (Y)
+                -->
+
+    </RelativeLayout>
+</ContentPage>
