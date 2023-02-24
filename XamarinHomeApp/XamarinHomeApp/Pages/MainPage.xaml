@@ -47,6 +47,10 @@
                         Text="AboutPage"
                         CornerRadius="{ext:ButtonView ButtonStyle=Round}"
                         Clicked="AboutButton_Clicked"/>
+                <Button x:Name="gridButton" 
+                        Text="GridPage"
+                        CornerRadius="{ext:ButtonView ButtonStyle=Round}"
+                        Clicked="GridButton_Clicked"/>
             </StackLayout>
         </ScrollView>
     </StackLayout>
