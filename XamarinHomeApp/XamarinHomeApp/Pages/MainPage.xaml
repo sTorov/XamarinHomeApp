@@ -48,9 +48,17 @@
                         CornerRadius="{ext:ButtonView ButtonStyle=Round}"
                         Clicked="AboutButton_Clicked"/>
                 <Button x:Name="gridButton" 
-                        Text="GridPage"
+                        Text="GridPage C#"
                         CornerRadius="{ext:ButtonView ButtonStyle=Round}"
                         Clicked="GridButton_Clicked"/>
+                <Button x:Name="xamlButton" 
+                        Text="GridPage XAML"
+                        CornerRadius="{ext:ButtonView ButtonStyle=Round}"
+                        Clicked="XamlButton_Clicked"/>
+                <Button x:Name="taskButton" 
+                        Text="Task"
+                        CornerRadius="{ext:ButtonView ButtonStyle=Round}"
+                        Clicked="TaskButton_Clicked"/>
             </StackLayout>
         </ScrollView>
     </StackLayout>
