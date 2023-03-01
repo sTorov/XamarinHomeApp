@@ -59,6 +59,10 @@
                         Text="Task"
                         CornerRadius="{ext:ButtonView ButtonStyle=Round}"
                         Clicked="TaskButton_Clicked"/>
+                <Button x:Name="newDeviceButton" 
+                        Text="NewDevicePage"
+                        CornerRadius="{ext:ButtonView ButtonStyle=Round}"
+                        Clicked="NewDeviceButton_Clicked"/>
             </StackLayout>
         </ScrollView>
     </StackLayout>

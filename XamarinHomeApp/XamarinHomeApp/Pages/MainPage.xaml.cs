@@ -67,5 +67,7 @@ namespace XamarinHomeApp.Pages
         private async void XamlButton_Clicked(object sender, EventArgs e) => await Navigation.PushAsync(new MergeGridPage());
 
         private async void TaskButton_Clicked(object sender, EventArgs e) => await Navigation.PushAsync(new Task());
+
+        private async void NewDeviceButton_Clicked(object sender, EventArgs e) => await Navigation.PushAsync(new NewDevicePage());
     }
 }

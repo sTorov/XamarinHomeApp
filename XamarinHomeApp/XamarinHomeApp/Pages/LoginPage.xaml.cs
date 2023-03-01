@@ -19,6 +19,13 @@ namespace XamarinHomeApp.Pages
         public LoginPage()
         {
             InitializeComponent();
+
+            //Изменение внешнего вида кнопки для Windows
+            if (Device.RuntimePlatform == Device.UWP)
+            {
+                loginButton.CornerRadius = 0;
+                loginButton.BackgroundColor = Color.LightGray;
+            }
         }
                 
         /// <summary>
@@ -45,6 +52,10 @@ namespace XamarinHomeApp.Pages
 
                 var infoMessage = (Label)stackLayout.Children.Last();   //Получаем последний элемент, используя свойство Children, после выполняем распаковку (можно просто через имя элемента)
                 infoMessage.Text = "Слишком много попыток! Попробуйте позже.";     //Показываем сообщение об ошибке
+
+                //Задание цвета текста при помощи статического метода Color.FromRGB()
+                //При определении цвета одновременно в C#-коде и XAML, приоритет выше будет у C#-кода
+                //infoMessage.TextColor = Color.FromRgb(255, 0, 0);
             }
             else
                 loginButton.Text = $"Выполняется вход... Попыток входа: {loginCouner}";     //Изменяем текст кнопки и показываем количество попыток входа

@@ -5,9 +5,12 @@
              x:Class="XamarinHomeApp.Pages.RegisterPage">
     
     <StackLayout HorizontalOptions="Center" VerticalOptions="Center" x:Name="stackLayout">
-        <Entry Placeholder="Your e-mail"
+        <Entry x:Name="placeHolder"
+               Placeholder="Your e-mail..."
                FontSize="Medium"
-               HorizontalTextAlignment="Center"/>
+               HorizontalTextAlignment="Center"
+               VerticalTextAlignment="Center"
+               PlaceholderColor="SkyBlue"/>
         <Button x:Name="registerButton"
                 CornerRadius="{ext:ButtonView ButtonStyle=Round}"
                 Text="Register"/>
