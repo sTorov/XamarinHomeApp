@@ -9,14 +9,24 @@ using Xamarin.Forms.Xaml;
 
 namespace XamarinHomeApp.Pages
 {
-    [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class RegisterPage : ContentPage
     {
         public RegisterPage()
         {
             InitializeComponent();
+            PlatformAdjust();
         }
 
-        private async void BackButton_Clicked(object sender, EventArgs e) => await Navigation.PopAsync();
+        private void PlatformAdjust()
+        {
+            if(Device.RuntimePlatform == Device.UWP)
+            {
+                placeHolder.PlaceholderColor = Color.SlateGray;
+                registerButton.TextColor = Color.AliceBlue;
+                registerButton.Margin = new Thickness(0, 5);
+                registerButton.BackgroundColor = Color.FromRgba(0, 0, 0, 100);
+                registerButton.CornerRadius = 0;
+            }
+        }
     }
 }

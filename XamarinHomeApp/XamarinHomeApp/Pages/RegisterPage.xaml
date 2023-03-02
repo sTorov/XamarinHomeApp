@@ -2,26 +2,25 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:ext="clr-namespace:XamarinHomeApp.Templates"
-             x:Class="XamarinHomeApp.Pages.RegisterPage">
+             x:Class="XamarinHomeApp.Pages.RegisterPage"
+             BackgroundImageSource="HomeBackground.jpg">    <!-- Задать фон картинкой, разположеной локально, для страницы -->
     
     <StackLayout HorizontalOptions="Center" VerticalOptions="Center" x:Name="stackLayout">
         <Entry x:Name="placeHolder"
                Placeholder="Your e-mail..."
-               FontSize="Medium"
+               FontSize="Title"
                HorizontalTextAlignment="Center"
                VerticalTextAlignment="Center"
                PlaceholderColor="SkyBlue"/>
         <Button x:Name="registerButton"
                 CornerRadius="{ext:ButtonView ButtonStyle=Round}"
-                Text="Register"/>
-        <Button x:Name="backButton" 
-                Text="Назад"
-                CornerRadius="{ext:ButtonView ButtonStyle=Round}"
-                Clicked="BackButton_Clicked"/>
+                Text="Register"
+                Opacity="0.8"/>
         <Label Text="Already have an account"
-               FontSize="Medium"
-               Padding="40,10,40,10"
+               FontSize="Subtitle"
+               Padding="30,10,30,10"
                HorizontalTextAlignment="Center"
-               VerticalTextAlignment="Center"/>
+               VerticalTextAlignment="Center"
+               TextColor="LightBlue"/>
     </StackLayout>
 </ContentPage>
