@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using XamarinHomeApp.Models;
 
 namespace XamarinHomeApp.Pages
 {
@@ -27,23 +28,23 @@ namespace XamarinHomeApp.Pages
         {
             //Создадим некий список устройств
             //В реальном приложении может выгружаться из базы или веб-сервиса
-            var homeDevices = new List<string>()
+            var homeDevices = new List<HomeDevice>
             {
-                "Чайник",
-                "Стиральная машина",
-                "Посудомоечная машина",
-                "Мультиварка",
-                "Водонагреватель",
-                "Плита",
-                "Микроволновая печь",
-                "Духовой шкаф",
-                "Холодильник",
-                "Увлажнитель воздуха",
-                "Телевизор",
-                "Пылесос",
-                "Музыкальный центр",
-                "Компьютер",
-                "Игровая консоль"
+                new HomeDevice("Чайник", "kettle.jpg"),
+                new HomeDevice("Стиральная машина"),
+                new HomeDevice("Посудомоечная машина"),
+                new HomeDevice("Мультиварка"),
+                new HomeDevice("Водонагреватель"),
+                new HomeDevice("Плита"),
+                new HomeDevice("Микроволновая печь"),
+                new HomeDevice("Духовой шкаф"),
+                new HomeDevice("Холодильник"),
+                new HomeDevice("Увлажнитель воздуха"),
+                new HomeDevice("Телевизор"),
+                new HomeDevice("Пылесос"),
+                new HomeDevice("музыкальный центр"),
+                new HomeDevice("Компьютер"),
+                new HomeDevice("Игровая консоль")
             };
 
             //Создадим новый стек
@@ -55,7 +56,7 @@ namespace XamarinHomeApp.Pages
                 //Создаём текстовый элемент
                 var deviceLabel = new Label
                 {
-                    Text = $"{device}",
+                    Text = $"{device.Name}",
                     FontSize = 17
                 };
 
@@ -71,12 +72,57 @@ namespace XamarinHomeApp.Pages
                     Content = deviceLabel
                 };
 
+                //Создаём объект, отвечающий за распознание нажатий
+                var gesture = new TapGestureRecognizer 
+                {
+                    NumberOfTapsRequired = 1,
+                };
+
+                //Устанавливаем по событию нажатия вызов обработчика
+                gesture.Tapped += async (sender, e) => await ShowImage(sender, e, device.Image);
+                //Добавляем настроенный распознаватель нажатий в текущий фрейм
+                frame.GestureRecognizers.Add(gesture);
+
                 //Добаляем фреймы в стек для их отображения в едином списке по порядку
                 innerStack.Children.Add(frame);
             }
 
             //Сохраняем стек в уже имеющийся в xaml-файле блок прокручивающейся разметки
             scrollView.Content = innerStack;
+        }
+
+        private async System.Threading.Tasks.Task ShowImage(object sender, EventArgs e, string imageName)
+        {
+            Image image = new Image();
+
+            //Если изображение отсутствует, показать информационное окно
+            if (string.IsNullOrEmpty(imageName))
+            {
+                #region DisplayAlert
+
+                //Всплывающее окно с уведомлением (DisplayPopupAsync, DisplayActionSheet)
+                //await DisplayAlert("", "Изображение устройства отсутствует", "OK");
+
+                //return;
+
+                #endregion
+
+                image.Source = new UriImageSource
+                {
+                    CachingEnabled = false,
+                    Uri = new Uri("https://i.stack.imgur.com/y9DpT.jpg")
+                };
+                image.Aspect = Device.RuntimePlatform == Device.Android
+                    ? Aspect.AspectFill
+                    : Aspect.AspectFit;
+            }
+            else
+            {
+                //При наличии изображения - загружаем его по заданному пути
+                image.Source = ImageSource.FromResource($"XamarinHomeApp.Images.{imageName}");
+            }
+
+            Content = image;
         }
     }
 }
