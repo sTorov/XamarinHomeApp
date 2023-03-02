@@ -26,6 +26,7 @@ namespace XamarinHomeApp.Pages
                 Margin = new Thickness(30, 10),
                 Placeholder = "Название"
             };
+            stackLayout.Children.Add(newDeviceName);
 
             //Создание многострочного поля для описания
             var newDeviceDescription = new Editor
@@ -35,6 +36,26 @@ namespace XamarinHomeApp.Pages
                 Margin = new Thickness(30, 10),
                 Placeholder = "Описание"
             };
+            stackLayout.Children.Add(newDeviceDescription);
+
+            //Создадим заголовок для переключателя
+            var switchHeader = new Label
+            {
+                Text = "Не использует газ",
+                HorizontalOptions = LayoutOptions.Center,
+                Margin = new Thickness(0, 5, 0, 0)
+            };
+            stackLayout.Children.Add(switchHeader);
+            
+            //Создадим переключатель
+            Switch switchControl = new Switch
+            {
+                IsToggled = false,
+                HorizontalOptions = LayoutOptions.Center,
+                ThumbColor = Color.DodgerBlue,
+                OnColor = Color.LightSteelBlue
+            };
+            stackLayout.Children.Add(switchControl);
 
             //Создание кнопки
             var addButton = new Button
@@ -43,11 +64,21 @@ namespace XamarinHomeApp.Pages
                 Margin = new Thickness(30, 10),
                 BackgroundColor = Color.Silver
             };
-
-            //Добавляем всё на страницу
-            stackLayout.Children.Add(newDeviceName);
-            stackLayout.Children.Add(newDeviceDescription);
             stackLayout.Children.Add(addButton);
+
+            //Регистрируем обработчик события переулючения Switch
+            switchControl.Toggled += (sender, e) => SwitchHandler(sender, e, switchHeader);
+        }
+
+        private void SwitchHandler(object sender, ToggledEventArgs e, Label header)
+        {
+            if (!e.Value)
+            {
+                header.Text = "Не использует газ";
+                return;
+            }
+
+            header.Text = "Использует газ";
         }
     }
 }
