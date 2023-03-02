@@ -71,6 +71,10 @@
                         Text="ProfilePage"
                         CornerRadius="{ext:ButtonView ButtonStyle=Round}"
                         Clicked="ProfileButton_Clicked"/>
+                <Button x:Name="webButton" 
+                        Text="WebPage"
+                        CornerRadius="{ext:ButtonView ButtonStyle=Round}"
+                        Clicked="WebButton_Clicked"/>
             </StackLayout>
         </ScrollView>
     </StackLayout>

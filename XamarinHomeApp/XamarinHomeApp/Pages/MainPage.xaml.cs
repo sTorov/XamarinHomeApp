@@ -73,5 +73,7 @@ namespace XamarinHomeApp.Pages
         private async void ControlDeviceButton_Clicked(object sender, EventArgs e) => await Navigation.PushAsync(new DeviceControlPage());
 
         private async void ProfileButton_Clicked(object sender, EventArgs e) => await Navigation.PushAsync(new ProfilePage());
+
+        private async void WebButton_Clicked(object sender, EventArgs e) => await Navigation.PushAsync(new WebPage());
     }
 }
