@@ -43,6 +43,21 @@ namespace XamarinHomeApp.Pages
             });
             stackLayout.Children.Add(datePickerText);
             stackLayout.Children.Add(datePicker);
+
+            //Виджет выбота времени
+            var timePickerText = new Label 
+            { 
+                Text = "Время запуска",
+                Margin = new Thickness(0, 20, 0, 0)
+            };
+            var timePicker = new TimePicker
+            {
+                Time = new TimeSpan(13, 0, 0)
+            };
+
+            stackLayout.Children.Add(timePickerText);
+            stackLayout.Children.Add(timePicker);
+
             stackLayout.Children.Add(new Button
             {
                 Text = "Сохранить",
@@ -52,12 +67,22 @@ namespace XamarinHomeApp.Pages
 
             //Регистрируем обработчик события выбора даты
             datePicker.DateSelected += (sender, e) => DateSelectedHandler(sender, e, datePickerText);
+            //Регистрируем обработчик собития выбора времени
+            timePicker.PropertyChanged += (sender, e) => TimeChangedHandler(sender, e, timePickerText, timePicker);
+
         }
 
         private void DateSelectedHandler(object sender, DateChangedEventArgs e, Label datePickerText)
         {
             //При срабатывании выбора будет меняться информационное сообщение
             datePickerText.Text = "Запустится " + e.NewDate.ToString("dd/MM/yyyy");
+        }
+
+        private void TimeChangedHandler(object sender, PropertyChangedEventArgs e, Label timePickerText, TimePicker timePicker)
+        {
+            //Обновляем текст сообщения, когда появляется новое значение времени
+            if (e.PropertyName == "Time")
+                timePickerText.Text = "В " + timePicker.Time;
         }
     }
 }
