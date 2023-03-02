@@ -67,6 +67,10 @@
                         Text="ControlDevicePage"
                         CornerRadius="{ext:ButtonView ButtonStyle=Round}"
                         Clicked="ControlDeviceButton_Clicked"/>
+                <Button x:Name="profileButton" 
+                        Text="ProfilePage"
+                        CornerRadius="{ext:ButtonView ButtonStyle=Round}"
+                        Clicked="ProfileButton_Clicked"/>
             </StackLayout>
         </ScrollView>
     </StackLayout>
