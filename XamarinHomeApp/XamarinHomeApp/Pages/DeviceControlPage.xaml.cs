@@ -58,6 +58,44 @@ namespace XamarinHomeApp.Pages
             stackLayout.Children.Add(timePickerText);
             stackLayout.Children.Add(timePicker);
 
+            //Создаём меню выбора в виде выпадающего списка с текстовым заголовком
+            var pickerText = new Label 
+            { 
+                Text = "Напряжение сети, В",
+                Margin = new Thickness(0, 20, 0, 0)
+            };
+            var picker = new Picker
+            {
+                Title = "Выберите напряжение сети",
+            };
+            picker.Items.Add("220");
+            picker.Items.Add("120");
+            //Добавряем элементы на страницу
+            stackLayout.Children.Add(pickerText);
+            stackLayout.Children.Add(picker);
+
+            //Установим текст текущего переключателя Stepper
+            var stepperText = new Label
+            {
+                Text = "Теипература: 5.0 °C",
+                HorizontalOptions = LayoutOptions.Center,
+                Margin = new Thickness(0, 30, 0, 0)
+            };
+            //Установим сам переключатель
+            Stepper stepper = new Stepper
+            {
+                Maximum = 30,
+                Minimum = -30,
+                Increment = 1,
+                Value = 5,
+                HorizontalOptions = LayoutOptions.Center,
+                //VerticalOptions = LayoutOptions.CenterAndExpand,
+            };
+            //Добавим в разметку
+            stackLayout.Children.Add(stepperText);
+            stackLayout.Children.Add(stepper);
+
+
             stackLayout.Children.Add(new Button
             {
                 Text = "Сохранить",
@@ -65,10 +103,13 @@ namespace XamarinHomeApp.Pages
                 Margin = new Thickness(0, 5, 0, 0)
             });
 
+
             //Регистрируем обработчик события выбора даты
             datePicker.DateSelected += (sender, e) => DateSelectedHandler(sender, e, datePickerText);
             //Регистрируем обработчик собития выбора времени
             timePicker.PropertyChanged += (sender, e) => TimeChangedHandler(sender, e, timePickerText, timePicker);
+            //Регистрируем обработчик события выбора температуры
+            stepper.ValueChanged += (sender, e) => TempChangedHandler(sender, e, stepperText);
 
         }
 
@@ -83,6 +124,12 @@ namespace XamarinHomeApp.Pages
             //Обновляем текст сообщения, когда появляется новое значение времени
             if (e.PropertyName == "Time")
                 timePickerText.Text = "В " + timePicker.Time;
+        }
+
+        private void TempChangedHandler(object sender, ValueChangedEventArgs e, Label header)
+        {
+            header.Text = $"Теипература: {e.NewValue:F1}°C";
+            //header.Text = string.Format("Теипература: {0:F1}°C", e.NewValue);
         }
     }
 }
