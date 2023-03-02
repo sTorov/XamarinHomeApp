@@ -95,12 +95,24 @@ namespace XamarinHomeApp.Pages
             stackLayout.Children.Add(stepperText);
             stackLayout.Children.Add(stepper);
 
+            //Добавим Slider
+            Slider slider = new Slider
+            {
+                Maximum = 30,
+                Minimum = -30,
+                Value = 5.0,
+                ThumbColor = Color.DodgerBlue,
+                MinimumTrackColor = Color.DodgerBlue,
+                MaximumTrackColor = Color.Gray
+            };
+            stackLayout.Children.Add(slider);
+
 
             stackLayout.Children.Add(new Button
             {
                 Text = "Сохранить",
                 BackgroundColor = Color.Silver,
-                Margin = new Thickness(0, 5, 0, 0)
+                Margin = new Thickness(0, 15, 0, 0)
             });
 
 
@@ -109,7 +121,8 @@ namespace XamarinHomeApp.Pages
             //Регистрируем обработчик собития выбора времени
             timePicker.PropertyChanged += (sender, e) => TimeChangedHandler(sender, e, timePickerText, timePicker);
             //Регистрируем обработчик события выбора температуры
-            stepper.ValueChanged += (sender, e) => TempChangedHandler(sender, e, stepperText);
+            stepper.ValueChanged += (sender, e) => TempChangedHandler(sender, slider, e, stepperText);
+            slider.ValueChanged += (sender, e) => TempChangedHandler(sender, stepper, e, stepperText);
 
         }
 
@@ -126,8 +139,15 @@ namespace XamarinHomeApp.Pages
                 timePickerText.Text = "В " + timePicker.Time;
         }
 
-        private void TempChangedHandler(object sender, ValueChangedEventArgs e, Label header)
+        private void TempChangedHandler(object sender, object recipient, ValueChangedEventArgs e, Label header)
         {
+            if(sender is Stepper stepper)
+                (recipient as Slider).Value = stepper.Value;
+            else if (sender is Slider slider)
+                (recipient as Stepper).Value = slider.Value;
+
+            //((Slider)recipient).Value;
+
             header.Text = $"Теипература: {e.NewValue:F1}°C";
             //header.Text = string.Format("Теипература: {0:F1}°C", e.NewValue);
         }
