@@ -14,7 +14,9 @@ namespace XamarinHomeApp.Pages
         //Константа для текста кнопки
         public const string BUTTON_TEXT = "Войти";
         //Переменная счетчика
-        public static int loginCouner = 0;
+        private static int loginCouner = 0;
+        //Создаем объект, возвращающий свойства устройства
+        private readonly IDeviceDetector detector = DependencyService.Get<IDeviceDetector>();
 
         public LoginPage()
         {
@@ -34,6 +36,9 @@ namespace XamarinHomeApp.Pages
                 backButton.BackgroundColor = Color.Black;
                 backButton.TextColor = Color.White;
             }
+
+            //Передаем информацию о платформе на экран
+            runningDevice.Text = detector.GetDevice();
         }
                 
         /// <summary>

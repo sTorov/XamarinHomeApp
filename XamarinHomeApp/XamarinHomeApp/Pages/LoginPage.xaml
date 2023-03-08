@@ -26,5 +26,10 @@
                Padding="30,10,30,10"
                VerticalTextAlignment="Center"
                HorizontalTextAlignment="Center"/>
+        <Label x:Name="runningDevice"
+               Padding="30,10"
+               FontSize="15"
+               VerticalTextAlignment="Center"
+               HorizontalTextAlignment="Center"/>
     </StackLayout>
 </ContentPage>
