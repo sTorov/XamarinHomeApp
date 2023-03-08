@@ -26,6 +26,14 @@ namespace XamarinHomeApp.Pages
                 loginButton.CornerRadius = 0;
                 loginButton.BackgroundColor = Color.LightGray;
             }
+
+            //Изменение внешнего вида кнопки для Desktop-версии
+            if(Device.Idiom == TargetIdiom.Desktop)
+            {
+                backButton.CornerRadius = 10;
+                backButton.BackgroundColor = Color.Black;
+                backButton.TextColor = Color.White;
+            }
         }
                 
         /// <summary>

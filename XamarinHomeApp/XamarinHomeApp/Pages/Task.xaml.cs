@@ -197,6 +197,7 @@ namespace XamarinHomeApp.Pages
         /// </summary>
         private void SetGridWeather(Grid grid)
         {
+            //Можно было обойтись одним гридом, без StackLayout
             grid.Children.Add(new StackLayout
             {
                 BackgroundColor = Color.LightSalmon,
