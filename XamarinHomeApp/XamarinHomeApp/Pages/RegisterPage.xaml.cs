@@ -19,7 +19,7 @@ namespace XamarinHomeApp.Pages
 
         private void PlatformAdjust()
         {
-            if(Device.RuntimePlatform == Device.UWP)
+            if(Device.RuntimePlatform == Device.macOS)
             {
                 placeHolder.PlaceholderColor = Color.SlateGray;
                 registerButton.TextColor = Color.AliceBlue;
@@ -28,5 +28,48 @@ namespace XamarinHomeApp.Pages
                 registerButton.CornerRadius = 0;
             }
         }
+
+        #region Trigger
+
+        private void Trigger()
+        {
+            var passField = new Entry();
+
+            //Опледеляем триггре для ввода поля пароля
+            var passFieldTrigger = new Trigger(typeof(Entry))
+            {
+                Property = Entry.IsFocusedProperty,
+                Value = true
+            };
+            //Setter
+            passFieldTrigger.Setters.Add(new Setter
+            {
+                Property = BackgroundColorProperty,
+                Value = Color.Gray
+            });
+            //Добавим анимацию триггера
+            passFieldTrigger.EnterActions.Add(new FocusTriggerAction());    //Действия при срабатывании триггера
+            passFieldTrigger.ExitActions.Add(new FocusTriggerAction());     //Действия при прекращении действия триггера
+            //Добавим триггер
+            passField.Triggers.Add(passFieldTrigger);
+
+            Content = new StackLayout
+            {
+                Children = { passField }
+            };
+        }
+
+        /// <summary>
+        /// Действие триггера, добавляющее анимацию для полей в фокусе
+        /// </summary>
+        class FocusTriggerAction : TriggerAction<Entry>
+        {
+            protected override void Invoke(Entry sender)
+            {
+                _ = sender.IsFocused ? sender.FadeTo(1) : sender.FadeTo(0.5);
+            }
+        }
+
+        #endregion
     }
 }

@@ -4,6 +4,19 @@
              xmlns:ext="clr-namespace:XamarinHomeApp.Templates"
              x:Class="XamarinHomeApp.Pages.RegisterPage"
              BackgroundImageSource="HomeBackground.jpg">    <!-- Задать фон картинкой, разположеной локально, для страницы -->
+
+    <!-- EventTrigger - Триггеры событий вызываются в ответ на события элемента -->
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="entryStyle" TargetType="Entry">
+                <Style.Triggers>
+                    <EventTrigger Event="TextChanged">
+                        <ext:EmailTriggerAction/>
+                    </EventTrigger>
+                </Style.Triggers>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
     
     <StackLayout HorizontalOptions="Center" VerticalOptions="Center" x:Name="stackLayout">
         <Entry x:Name="placeHolder"
@@ -11,11 +24,13 @@
                FontSize="Title"
                HorizontalTextAlignment="Center"
                VerticalTextAlignment="Center"
-               PlaceholderColor="SkyBlue"/>
+               PlaceholderColor="SkyBlue"
+               Style="{StaticResource Key=entryStyle}"/>
         <Button x:Name="registerButton"
                 CornerRadius="{ext:ButtonView ButtonStyle=Round}"
                 Text="Register"
-                Opacity="0.8"/>
+                Opacity="0.8"
+                Style="{StaticResource buttonPassedTrigger}"/>  <!-- Применение стиля (стили переназначают уже назначеные свойтва) -->
         <Label Text="Already have an account"
                FontSize="Subtitle"
                Padding="30,10,30,10"

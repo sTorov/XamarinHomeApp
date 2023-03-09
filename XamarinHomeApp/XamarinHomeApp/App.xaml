@@ -1,12 +1,60 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Application xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="XamarinHomeApp.App">
+             x:Class="XamarinHomeApp.App"
+             xmlns:examp="clr-namespace:XamarinHomeApp.Templates">
     <!-- Используется для создания ресурсов, которые можно использовать во всём приложении -->
     <Application.Resources>
         <ResourceDictionary>
+            <!-- LoginPage -->
             <Color x:Key="commonColor">#0000FF</Color>
             <x:Double x:Key="commonFont">11</x:Double>
+            <!-- Стили (RegisterPage) -->
+            <Style x:Key="buttonStyle" TargetType="Button">     <!-- если не указывать свойтво x:Key, то данный стиль применится ко всем элементам, указанным в TargetType -->
+                <Setter Property="BackgroundColor" Value="DarkBlue"/>
+                <!--<Setter Property="TextColor" Value="WhiteSmoke"/>-->
+                <!--<Setter Property="TextColor" Value="{StaticResource commonColor}"/>-->      <!-- Ссылка на другой ресурс при объявлении стиля -->
+                <!-- Данная форма записи позволяет задавать цвета в формате Color.FromRGB() -->
+                <Setter Property="TextColor">
+                    <Setter.Value>
+                        <Color>
+                            <x:Arguments>
+                                <x:Double>255</x:Double>
+                                <x:Double>255</x:Double>
+                                <x:Double>255</x:Double>
+                            </x:Arguments>
+                        </Color>
+                    </Setter.Value>                    
+                </Setter>
+                
+                <Setter Property="Opacity" Value="1"/>
+            </Style>
+            
+            <!-- Триггер - позволяет менять значения некоторых свойств в зависимости от отслеживаемого состояния в триггере -->
+            <Style x:Key="entryTriggerStyle" TargetType="Entry">
+                <Setter Property="TextColor" Value="Black"/>
+                <Style.Triggers>
+                    <Trigger Property="IsFocused" Value="True" TargetType="Entry">
+                        <Setter Property="TextColor" Value="DarkRed"/>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+            
+            <Style x:Key="buttonPassedTrigger" TargetType="Button" BasedOn="{StaticResource buttonStyle}">
+                <Style.Triggers>
+                    <Trigger Property="IsPressed" Value="True" TargetType="Button">
+                        <Setter Property="BackgroundColor" Value="Gray"/>
+                        <Setter Property="TextColor" Value="Black"/>
+                        <Trigger.EnterActions>
+                            <examp:PassedActionTrigger/>
+                        </Trigger.EnterActions>
+                        <Trigger.ExitActions>
+                            <examp:PassedActionTrigger/>
+                        </Trigger.ExitActions>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+            
         </ResourceDictionary>
     </Application.Resources>
 </Application>
