@@ -4,16 +4,21 @@
              xmlns:local="clr-namespace:XamarinHomeApp.Pages"
              xmlns:ext="clr-namespace:XamarinHomeApp.Templates"
              x:Class="XamarinHomeApp.Pages.DevicesPage">
+    <ContentPage.Resources>
+        <StyleSheetExtension Source="/Static/DevicePage.css"/>
+    </ContentPage.Resources>
     
     <StackLayout BackgroundColor="LightGray">
         <Label Text="HomeApp - Ваши устройтва"
                HorizontalOptions="Center"
                FontSize="Title"
-               Padding="30,10,30,10"/>
-        <ScrollView BackgroundColor="AliceBlue" x:Name="scrollView"></ScrollView>
+               Padding="30,10,30,10"
+               StyleId="header"/>
+        <ScrollView BackgroundColor="AliceBlue" x:Name="scrollView"/>
         <Button x:Name="backButton"
                 BackgroundColor="WhiteSmoke"
                 Text="Назад"
-                Clicked="BackButton_Clicked"/>
+                Clicked="BackButton_Clicked"
+                StyleClass="btn-back"/>
     </StackLayout>
 </ContentPage>

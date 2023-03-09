@@ -1,0 +1,20 @@
+﻿/*Селектор корневого элемента*/
+^contentpage{
+}
+
+/*Селектор элемента*/
+stacklayout{
+    background-color: lightblue;
+}
+
+/*Селектор класса*/
+.btn-back{
+    /*без px*/
+    margin: 8;
+}
+
+/*Селектор ИД*/
+#header{
+    font-size: 24;
+    font-weight: bold;
+}
