@@ -39,6 +39,9 @@ namespace XamarinHomeApp.Pages
 
             //Передаем информацию о платформе на экран
             runningDevice.Text = detector.GetDevice();
+
+            //Установим динамический ресурс при помощи специального метода (у кода приоритет над разметкой)
+            cube.SetDynamicResource(BoxView.BackgroundColorProperty, "commonColor");
         }
                 
         /// <summary>
@@ -65,13 +68,35 @@ namespace XamarinHomeApp.Pages
 
                 var infoMessage = (Label)stackLayout.Children.Last();   //Получаем последний элемент, используя свойство Children, после выполняем распаковку (можно просто через имя элемента)
                 infoMessage.Text = "Слишком много попыток! Попробуйте позже.";     //Показываем сообщение об ошибке
+                
+                #region Color
 
                 //Задание цвета текста при помощи статического метода Color.FromRGB()
                 //При определении цвета одновременно в C#-коде и XAML, приоритет выше будет у C#-кода
                 //infoMessage.TextColor = Color.FromRgb(255, 0, 0);
+
+                #endregion
+
+                #region Resources
+
+                //Добавление цвета в ресурсы страницы
+                //var warningColor = Color.FromHex("#ffa500");    //переменная для сохранения в ресурсы
+                //Resources.Add("warningColor", warningColor);    //сохранение значения в ресурсы (Remove("key") - удаление значения из словаря)
+
+                //т.к. в словаре все значения хранится в виде объектов - для их использования необходимо явно приводить их к нужному типу
+                //infoMessage.TextColor = (Color)Resources["warningColor"];   //применение значения из словаря ресурсов
+
+                #endregion
+
+                //Использование статических ресурсов, являющихся общими для приложения
+                infoMessage.TextColor = (Color)Application.Current.Resources["commonColor"];
+                Resources["commonColor"] = Color.FromHex("#e70d4f");     //Обновление динамического ресурса
             }
             else
+            {
                 loginButton.Text = $"Выполняется вход... Попыток входа: {loginCouner}";     //Изменяем текст кнопки и показываем количество попыток входа
+                Resources["commonColor"] = Color.FromHex("#ff8e00");
+            }
 
             loginCouner++;  //Увеличиваем счетчик
         }

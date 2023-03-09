@@ -5,8 +5,27 @@
              xmlns:ext="clr-namespace:XamarinHomeApp.Templates"
              x:Class="XamarinHomeApp.Pages.LoginPage">
     
+    <!-- Для использования статических ресурсов во всём приложении, их нужно разместить в App.xaml -->
+    
+    <!-- В данном случае ресурсы будут доступны для всей страницы LoginPage -->
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Color x:Key="errorColor">#FF0000</Color>
+            <x:Double x:Key="errorFont">Small</x:Double>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
     <StackLayout VerticalOptions="Center" HorizontalOptions="Center"
                  x:Name="stackLayout">
+        
+        <!-- В данном случае ресурсы будут доступны только для контейнера, в котором размещены ресурсы -->
+        <StackLayout.Resources>
+            <ResourceDictionary>
+                <Color x:Key="exampleColor">#00ff00</Color>
+                <x:Double x:Key="exampleFont">20</x:Double>
+            </ResourceDictionary>
+        </StackLayout.Resources>
+        
         <Label Text="HomeApp - Ваш умный дом" 
                FontSize="Title"
                Padding="30,10,30,10"
@@ -20,15 +39,43 @@
                 Text="Назад"
                 CornerRadius="{ext:ButtonView ButtonStyle=Round}"
                 Clicked="BackButton_Clicked"/>
+        
+        <!-- Динамический ресурс - можно изменять в ходе выполнения программы -->
+        <BoxView x:Name="cube"
+                 WidthRequest="20"
+                 HeightRequest="20"
+                 HorizontalOptions="Center"
+                 BackgroundColor="{DynamicResource Key=errorColor}"/>
+        
+        <!-- Применение статического ресурса - нельзя изменять в ходе выполнения программы -->
+        <Label Text="StaticResources(ContentPage)"
+               FontSize="{StaticResource Key=errorFont}"
+               TextColor="{StaticResource Key=errorColor}"
+               Padding="30,10,30,10"
+               VerticalTextAlignment="Center"
+               HorizontalTextAlignment="Center"/>
+        <Label Text="StaticResources(StackLayout)"
+               FontSize="{StaticResource Key=exampleFont}"
+               TextColor="{StaticResource Key=exampleColor}"
+               Padding="30,10,30,10"
+               VerticalTextAlignment="Center"
+               HorizontalTextAlignment="Center"/>
+        <Label Text="StaticResources(App.xaml)"
+               FontSize="{StaticResource Key=commonFont}"
+               TextColor="{StaticResource Key=commonColor}"
+               Padding="30,10,30,10"
+               VerticalTextAlignment="Center"
+               HorizontalTextAlignment="Center"/>
+        
+        <Label x:Name="runningDevice"
+               Padding="30,10"
+               FontSize="15"
+               VerticalTextAlignment="Center"
+               HorizontalTextAlignment="Center"/>
         <Label x:Name="infoMessage"
                FontSize="Small"
                TextColor="{ext:ColorView R=255, G=0, B=0}"
                Padding="30,10,30,10"
-               VerticalTextAlignment="Center"
-               HorizontalTextAlignment="Center"/>
-        <Label x:Name="runningDevice"
-               Padding="30,10"
-               FontSize="15"
                VerticalTextAlignment="Center"
                HorizontalTextAlignment="Center"/>
     </StackLayout>
