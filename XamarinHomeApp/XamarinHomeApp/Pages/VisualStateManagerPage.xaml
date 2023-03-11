@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:XamarinHomeApp.Templates"
+             x:Class="XamarinHomeApp.Pages.VisualStateManagerPage">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="buttonStyle" TargetType="Button">
+                <Setter Property="CornerRadius" Value="{local:ButtonView ButtonStyle=SemiRound}"/>
+                <Setter Property="Margin" Value="20"/>
+                <Setter Property="BackgroundColor" Value="LightGray"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
+    <StackLayout x:Name="stackLayout" VerticalOptions="Center" HorizontalOptions="Center">
+        <Entry x:Name="entry"
+               WidthRequest="200"
+               BackgroundColor="LightGray"
+               Text="Example">
+            <!-- VisualStateManager - позволяет изменять свойства компонента в зависимости от его состояния -->
+            <VisualStateManager.VisualStateGroups>
+                <VisualStateGroup x:Name="CommonStates">
+                    <!-- Normal - не задает никаких свойств -->
+                    <VisualState x:Name="Normal">
+                        <VisualState.Setters/>
+                    </VisualState>
+                    <!-- Focused - меняет внешний вид поля при фокусировании на компоненте -->
+                    <VisualState x:Name="Focused">
+                        <VisualState.Setters>
+                            <Setter Property="TextColor" Value="Cornflowerblue"/>
+                            <Setter Property="BackgroundColor" Value="Lavender"/>
+                        </VisualState.Setters>
+                    </VisualState>
+                    <!-- Disabled - меняет внешний вид поля при отключении доступа к компоненту -->
+                    <VisualState x:Name="Disabled">
+                        <VisualState.Setters>
+                            <Setter Property="BackgroundColor" Value="LightGray"/>
+                            <Setter Property="TextColor" Value="White"/>
+                        </VisualState.Setters>
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+            
+        </Entry>
+        <Button x:Name="button" 
+                Text="Button"
+                Style="{StaticResource Key=buttonStyle}"/>
+    </StackLayout>
+    
+</ContentPage>

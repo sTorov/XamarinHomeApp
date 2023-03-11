@@ -55,6 +55,35 @@
                 </Style.Triggers>
             </Style>
             
+            <!-- VisualStateManager - отслеживание состояния компонента -->
+            <!-- Valid & Invalid - в данном случае кастомные состояния, Disabled - предустановленное -->
+            <Style TargetType="Entry" x:Key="ValidInputStyle">
+                <Setter Property="VisualStateManager.VisualStateGroups">
+                    <VisualStateGroupList>
+                        <VisualStateGroup x:Name="ValidStates">
+                            
+                            <VisualState x:Name="Valid">
+                                <VisualState.Setters>
+                                    <Setter Property="TextColor" Value="CornflowerBlue"/>
+                                </VisualState.Setters>
+                            </VisualState>
+
+                            <VisualState x:Name="Invalid">
+                                <VisualState.Setters>
+                                    <Setter Property="TextColor" Value="IndianRed"/>
+                                </VisualState.Setters>
+                            </VisualState>
+
+                            <VisualState x:Name="Disabled">
+                                <VisualState.Setters>
+                                    <Setter Property="BackgroundColor" Value="LightCyan"/>
+                                </VisualState.Setters>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateGroupList>
+                </Setter>
+            </Style>
+            
         </ResourceDictionary>
     </Application.Resources>
 </Application>

@@ -75,6 +75,10 @@
                         Text="WebPage"
                         CornerRadius="{ext:ButtonView ButtonStyle=Round}"
                         Clicked="WebButton_Clicked"/>
+                <Button x:Name="visualStateManagerButton" 
+                        Text="VSM_Page"
+                        CornerRadius="{ext:ButtonView ButtonStyle=Round}"
+                        Clicked="VisualStateManagerButton_Clicked"/>
             </StackLayout>
         </ScrollView>
     </StackLayout>
