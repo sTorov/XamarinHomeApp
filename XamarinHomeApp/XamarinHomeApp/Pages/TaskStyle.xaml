@@ -1,0 +1,125 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:XamarinHomeApp.Pages"
+             x:Class="XamarinHomeApp.Pages.TaskStyle">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Color x:Key="labelColor">Gray</Color>
+            <Thickness x:Key="commonMargin">30,10,30,10</Thickness>
+            <Thickness x:Key="controllMargin">30,0,30,10</Thickness>
+            
+            <Style x:Key="titleStyle" TargetType="Label">
+                <Setter Property="TextColor" Value="{StaticResource labelColor}"/>
+                <Setter Property="HorizontalOptions" Value="Center"/>
+                <Setter Property="FontSize" Value="Title"/>
+                <Setter Property="Margin" Value="{StaticResource commonMargin}"/>
+            </Style>
+            <Style x:Key="labelStyle" TargetType="Label" BasedOn="{StaticResource titleStyle}">
+                <Setter Property="FontSize" Value="Micro"/>
+                <Setter Property="HorizontalOptions" Value="Start"/>
+            </Style>
+            <Style x:Key="labelStyleCenter" TargetType="Label" BasedOn="{StaticResource labelStyle}">
+                <Setter Property="HorizontalOptions" Value="Center"/>
+                <Setter Property="Margin" Value="30,10,30,0"/>
+            </Style>
+
+            <Style x:Key="sliderStyle" TargetType="Slider" >
+                <Setter Property="Maximum" Value="100"/>
+                <Setter Property="Minimum" Value="0"/>
+                <Setter Property="MaximumTrackColor" Value="#ccc"/>
+                <Setter Property="MinimumTrackColor" Value="SteelBlue"/>
+                <Setter Property="ThumbColor" Value="SteelBlue"/>
+                <Setter Property="Margin" Value="{StaticResource controllMargin}"/>
+            </Style>
+
+            <Style x:Key="switchStyle" TargetType="Switch">
+                <Setter Property="HorizontalOptions" Value="Center"/>
+                <Setter Property="WidthRequest" Value="50"/>
+                <Setter Property="Margin" Value="{StaticResource controllMargin}"/>
+            </Style>
+
+            <Style x:Key="button" TargetType="Button">
+                <Setter Property="HorizontalOptions" Value="Center"/>
+                <Setter Property="Padding" Value="60,10"/>
+                <Setter Property="CornerRadius" Value="10"/>
+            </Style>
+
+            <Style x:Key="ValidValueState" TargetType="Picker">
+                <Setter Property="Margin" Value="30, 0"/>
+                <Setter Property="VisualStateManager.VisualStateGroups">
+                    <VisualStateGroupList>
+                        <VisualStateGroup x:Name="ValidStates">
+                            
+                            <VisualState x:Name="Invalid">
+                                <VisualState.Setters>
+                                    <Setter Property="TextColor" Value="IndianRed"/>
+                                    <Setter Property="BackgroundColor" Value="#22ff0000"/>
+                                </VisualState.Setters>
+                            </VisualState>
+
+                            <VisualState x:Name="Valid">
+                                <VisualState.Setters>
+                                    <Setter Property="TextColor" Value="Black"/>
+                                    <Setter Property="BackgroundColor" Value="LightBlue"/>
+                                </VisualState.Setters>
+                            </VisualState>
+
+                            <VisualState x:Name="Disabled">
+                                <VisualState.Setters>
+                                    <Setter Property="IsEnabled" Value="False"/>
+                                    <Setter Property="TextColor" Value="Gray"/>
+                                    <Setter Property="BackgroundColor" Value="LightGray"/>
+                                </VisualState.Setters>
+                            </VisualState>
+
+                        </VisualStateGroup>
+                    </VisualStateGroupList>
+                </Setter>
+            </Style>
+            
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
+    <StackLayout>
+        <Label x:Name="Title"
+               Text="Установить будильник"
+               Style="{StaticResource Key=titleStyle}"/>
+        <Label x:Name="dataText"
+               Text="Выберите дату"
+               Style="{StaticResource Key=labelStyle}"/>
+        <DatePicker x:Name="date"
+                    Format="MMM/dd/yyyy"
+                    Date="{x:Static local:TaskStyle.dateValue}"
+                    DateSelected="Data_DateSelected"
+                    Style="{StaticResource Key=ValidValueState}"/>
+        <Label x:Name="timeText"
+               Text="Выберите время"
+               Style="{StaticResource Key=labelStyle}"/>
+        <TimePicker x:Name="time"
+                    Format="HH:mm"
+                    Time="{x:Static local:TaskStyle.timeValue}"
+                    PropertyChanged="Time_PropertyChanged"
+                    Style="{StaticResource Key=ValidValueState}"/>
+        <Label x:Name="sliderText"
+               Text="Установить громкость"
+               Style="{StaticResource Key=labelStyleCenter}"/>
+        <Slider x:Name="slider"
+                Style="{StaticResource Key=sliderStyle}"
+                ValueChanged="Slider_ValueChanged"/>
+        <Label x:Name="switchText"
+               Text="Повторять каждый день"
+               Style="{StaticResource Key=labelStyleCenter}"/>
+        <Switch x:Name="switch"
+                Style="{StaticResource Key=switchStyle}"/>
+        <Button x:Name="button"
+                Text="Сохранить"
+                Style="{StaticResource Key=button}"
+                Clicked="Button_Clicked"/>
+        <Label x:Name="messageText"
+               Text=""
+               Style="{StaticResource Key=labelStyleCenter}"/>
+    </StackLayout>
+    
+</ContentPage>

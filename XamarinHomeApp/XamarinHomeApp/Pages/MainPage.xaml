@@ -79,6 +79,10 @@
                         Text="VSM_Page"
                         CornerRadius="{ext:ButtonView ButtonStyle=Round}"
                         Clicked="VisualStateManagerButton_Clicked"/>
+                <Button x:Name="taskStyleButton" 
+                        Text="TaskStyle"
+                        CornerRadius="{ext:ButtonView ButtonStyle=Round}"
+                        Clicked="TaskStyleButton_Clicked"/>
             </StackLayout>
         </ScrollView>
     </StackLayout>
