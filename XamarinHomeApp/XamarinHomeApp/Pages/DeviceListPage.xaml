@@ -19,9 +19,13 @@
                Padding="30,10"
                StyleId="header"/>
         <ListView x:Name="deviceList"
-                  ItemsSource="{Binding Devices}"
-                  ItemSelected="DeviceList_ItemSelected"
-                  HasUnevenRows="True">
+                  HasUnevenRows="True"
+                  ItemsSource="{Binding DevicesGroups}"
+                  GroupDisplayBinding="{Binding Name}"
+                    IsGroupingEnabled="True"
+                    SeparatorVisibility="Default"
+                    RowHeight="60">
+            <!--ItemSelected="DeviceList_ItemSelected"-->
             <!--ItemTapped="DeviceList_ItemTapped"-->
             <ListView.ItemTemplate>
                 <DataTemplate>
@@ -56,14 +60,14 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <StackLayout Orientation="Horizontal" 
+        <!--<StackLayout Orientation="Horizontal" 
                      Padding="0,10" 
                      HorizontalOptions="CenterAndExpand">
             <Button Text="Новое устройство"
                 Clicked="AddDevice"/>
             <Button Text="Удалить устройство"
                 Clicked="RemoveDevice"/>
-        </StackLayout>
+        </StackLayout>-->
     </StackLayout>
     
 </ContentPage>
