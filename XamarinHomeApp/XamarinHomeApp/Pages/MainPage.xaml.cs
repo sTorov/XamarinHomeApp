@@ -79,5 +79,9 @@ namespace XamarinHomeApp.Pages
         private async void VisualStateManagerButton_Clicked(object sender, EventArgs e) => await Navigation.PushAsync(new VisualStateManagerPage());
 
         private async void TaskStyleButton_Clicked(object sender, EventArgs e) => await Navigation.PushAsync(new TaskStyle());
+
+        private async void BindingButton_Clicked(object sender, EventArgs e) => await Navigation.PushAsync(new BindingPage());
+
+        private async void BindingModeButton_Clicked(object sender, EventArgs e) => await Navigation.PushAsync(new BindingModePage());
     }
 }

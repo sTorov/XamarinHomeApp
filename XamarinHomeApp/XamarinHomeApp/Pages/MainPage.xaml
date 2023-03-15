@@ -83,6 +83,14 @@
                         Text="TaskStyle"
                         CornerRadius="{ext:ButtonView ButtonStyle=Round}"
                         Clicked="TaskStyleButton_Clicked"/>
+			    <Button x:Name="bindingButton" 
+                        Text="BindingPage"
+                        CornerRadius="{ext:ButtonView ButtonStyle=Round}"
+                        Clicked="BindingButton_Clicked"/>
+			    <Button x:Name="bindingModeButton" 
+                        Text="BindingModePage"
+                        CornerRadius="{ext:ButtonView ButtonStyle=Round}"
+                        Clicked="BindingModeButton_Clicked"/>
             </StackLayout>
         </ScrollView>
     </StackLayout>
