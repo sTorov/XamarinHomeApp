@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="XamarinHomeApp.Pages.DeviceListPage">
+    
+    <StackLayout>
+        <Label Text="HomeApp - Ваши устройства"
+               HorizontalOptions="Center"
+               FontSize="Large"
+               Padding="30,10"
+               StyleId="header"/>
+        <ListView x:Name="deviceList"
+                  ItemsSource="{Binding Devices}"
+                  ItemSelected="DeviceList_ItemSelected"
+                  HasUnevenRows="True">
+            <!--ItemTapped="DeviceList_ItemTapped"-->
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ImageCell ImageSource="{Binding Image}"
+                               Text="{Binding Name}"
+                               Detail="{Binding Description}"
+                               TextColor="DodgerBlue"
+                               DetailColor="Gray"/>
+                    <!--
+                            Хорошо подходит для отображения списков с описаниями
+                    <TextCell Text="{Binding Name}"
+                              Detail="{Binding Description}"
+                              TextColor="DodgerBlue"
+                              DetailColor="Gray"/>-->
+                    <!--
+                            Универсальная ячейка, которая может содержать любой контент. С её помощью можно создавать свои ячейки
+                    <ViewCell>
+                        <ViewCell.View>
+                            <StackLayout>
+                                <Label Text="{Binding Name}" 
+                                       FontAttributes="Bold"
+                                       FontSize="18"
+                                       Padding="10,5"/>
+                                <Label Text="{Binding Description}"
+                                       Padding="10,5,0,0"/>
+                            </StackLayout>
+                        </ViewCell.View>
+                    </ViewCell>-->
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <Button BackgroundColor="AliceBlue"
+                x:Name="addButton"
+                Text="Добавить"
+                StyleClass="btn-add"/>
+    </StackLayout>
+    
+</ContentPage>

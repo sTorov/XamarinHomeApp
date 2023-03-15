@@ -83,5 +83,7 @@ namespace XamarinHomeApp.Pages
         private async void BindingButton_Clicked(object sender, EventArgs e) => await Navigation.PushAsync(new BindingPage());
 
         private async void BindingModeButton_Clicked(object sender, EventArgs e) => await Navigation.PushAsync(new BindingModePage());
+
+        private async void DeviceListButton_Clicked(object sender, EventArgs e) => await Navigation.PushAsync(new DeviceListPage());
     }
 }

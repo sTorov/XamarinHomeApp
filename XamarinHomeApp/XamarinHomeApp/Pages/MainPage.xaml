@@ -91,6 +91,10 @@
                         Text="BindingModePage"
                         CornerRadius="{ext:ButtonView ButtonStyle=Round}"
                         Clicked="BindingModeButton_Clicked"/>
+			    <Button x:Name="deviceListButton" 
+                        Text="DeviceListPage"
+                        CornerRadius="{ext:ButtonView ButtonStyle=Round}"
+                        Clicked="DeviceListButton_Clicked"/>
             </StackLayout>
         </ScrollView>
     </StackLayout>

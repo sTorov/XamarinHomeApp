@@ -11,13 +11,21 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Images\Chainik.png" />
     <None Remove="Images\kettle.jpg" />
+    <None Remove="Images\Multivarka.png" />
+    <None Remove="Images\PosudomoechnayaMashina.png" />
+    <None Remove="Images\StiralnayaMashina.png" />
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Images\Chainik.png" />
     <EmbeddedResource Include="Images\kettle.jpg">
       <CustomToolNamespace></CustomToolNamespace>
     </EmbeddedResource>
+    <EmbeddedResource Include="Images\Multivarka.png" />
+    <EmbeddedResource Include="Images\PosudomoechnayaMashina.png" />
+    <EmbeddedResource Include="Images\StiralnayaMashina.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -51,6 +59,9 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Pages\ClimatePage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\DeviceListPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Pages\DevicesPage.xaml">
