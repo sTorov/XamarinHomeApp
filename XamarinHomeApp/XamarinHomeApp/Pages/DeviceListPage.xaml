@@ -2,6 +2,15 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="XamarinHomeApp.Pages.DeviceListPage">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Button">
+                <Setter Property="Margin" Value="4"/>
+                <Setter Property="CornerRadius" Value="15"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
     
     <StackLayout>
         <Label Text="HomeApp - Ваши устройства"
@@ -16,17 +25,20 @@
             <!--ItemTapped="DeviceList_ItemTapped"-->
             <ListView.ItemTemplate>
                 <DataTemplate>
+                    <!--
+                            TextCell + картинка
                     <ImageCell ImageSource="{Binding Image}"
                                Text="{Binding Name}"
                                Detail="{Binding Description}"
                                TextColor="DodgerBlue"
-                               DetailColor="Gray"/>
-                    <!--
-                            Хорошо подходит для отображения списков с описаниями
+                               DetailColor="Gray"/>-->
+                    
+                    <!--Хорошо подходит для отображения списков с описаниями-->
                     <TextCell Text="{Binding Name}"
                               Detail="{Binding Description}"
                               TextColor="DodgerBlue"
-                              DetailColor="Gray"/>-->
+                              DetailColor="Gray"/>
+                    
                     <!--
                             Универсальная ячейка, которая может содержать любой контент. С её помощью можно создавать свои ячейки
                     <ViewCell>
@@ -44,10 +56,14 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <Button BackgroundColor="AliceBlue"
-                x:Name="addButton"
-                Text="Добавить"
-                StyleClass="btn-add"/>
+        <StackLayout Orientation="Horizontal" 
+                     Padding="0,10" 
+                     HorizontalOptions="CenterAndExpand">
+            <Button Text="Новое устройство"
+                Clicked="AddDevice"/>
+            <Button Text="Удалить устройство"
+                Clicked="RemoveDevice"/>
+        </StackLayout>
     </StackLayout>
     
 </ContentPage>

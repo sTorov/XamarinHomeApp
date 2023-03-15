@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,7 +13,8 @@ namespace XamarinHomeApp.Pages
 {
     public partial class DeviceListPage : ContentPage
     {
-        public List<HomeDevice> Devices { get; set; } = new List<HomeDevice>();
+        //Используется для автоматического отслеживания изменений в списке и уведомления об этих изменениях в приложении
+        public ObservableCollection<HomeDevice> Devices { get; set; } = new ObservableCollection<HomeDevice>();
 
         public DeviceListPage()
         {
@@ -48,6 +50,42 @@ namespace XamarinHomeApp.Pages
             var device = (HomeDevice)e.SelectedItem;
             //уведомление
             DisplayAlert("Выбор", $"Вы выбрали {device.Name}, {device.Description}", "ОК");
+        }
+
+        /// <summary>
+        /// Обработчик добавления устройства
+        /// </summary>
+        private async void AddDevice(object sender, EventArgs e)
+        {
+            //Запрос и валидация имени устройства
+            var newDeviceName = await DisplayPromptAsync("Новое устройство", "Введите имя устройства", "Продолжить", "Отмена");
+            if (Devices.Any(d => d.Name.CompareTo(newDeviceName.Trim()) == 0))
+            {
+                await DisplayAlert("Ошибка", $"Устройство {newDeviceName} уже существует", "OK");
+                return;
+            }
+
+            //Запрос описания устройства
+            var newDeviceDescription = await DisplayPromptAsync(newDeviceName, "Добавьте краткое описание", "Сохранить", "Отмена");
+            //Добавление устройства и уведомление пользователя
+            Devices.Add(new HomeDevice(newDeviceName, description: newDeviceDescription));
+            await DisplayAlert(null, $"Устройство {newDeviceName} успешно добавлено", "OK");
+        }
+
+        /// <summary>
+        /// Обработчик удаления устройства
+        /// </summary>
+        private async void RemoveDevice(object sender, EventArgs e)
+        {
+            //Получаем и распаковываем выбранный элемент
+            var deviceToRemove = deviceList.SelectedItem as HomeDevice;
+            if (deviceToRemove != null)
+            {
+                //Удаляем
+                Devices.Remove(deviceToRemove);
+                //Уведомляем пользователя
+                await DisplayAlert(null, $"Устройство {deviceToRemove.Name} удалено", "OK");
+            }
         }
     }
 }
