@@ -30,13 +30,25 @@ namespace XamarinHomeApp.Pages
             InitializeComponent();
 
             // Первоначальные данные сохраняем в обычный лист
+            //var initialList = new List<HomeDevice>
+            //{
+            //    new HomeDevice("Чайник", "Chainik.png", "LG, объем 2л.", "Кухня"),
+            //    new HomeDevice("Стиральная машина", "StiralnayaMashina.png", "BOSCH", "Ванная"),
+            //    new HomeDevice("Посудомоечная машина", "PosudomoechnayaMashina.png", "Gorenje", "Кухня"),
+            //    new HomeDevice("Мультиварка", "Multivarka.png", "Philips", "Кухня")
+            //};
+
+            #region DataInFile_Data
+
             var initialList = new List<HomeDevice>
             {
-                new HomeDevice("Чайник", "Chainik.png", "LG, объем 2л.", "Кухня"),
-                new HomeDevice("Стиральная машина", "StiralnayaMashina.png", "BOSCH", "Ванная"),
-                new HomeDevice("Посудомоечная машина", "PosudomoechnayaMashina.png", "Gorenje", "Кухня"),
-                new HomeDevice("Мультиварка", "Multivarka.png", "Philips", "Кухня")
+                new HomeDevice("Чайник", "Chainik.png", "LG, объем 2л.", "Кухня") { Id = new Guid("735a3848-dad1-40f6-8fb7-36d2da16f1f3") },
+                new HomeDevice("Стиральная машина", "StiralnayaMashina.png", description: "BOSCH", "Ванная") { Id = new Guid("cca22a07-5593-4485-b21d-ed7aba4ac815") },
+                new HomeDevice("Посудомоечная машина", "PosudomoechnayaMashina.png", "Gorenje", "Кухня") { Id = new Guid("eba7c7eb-941b-4b1d-a179-21fa87a783ac") },
+                new HomeDevice("Мультиварка", "Multivarka.png", "Philips", "Кухня") { Id = new Guid("7e19330d-23f2-4fe7-b8b7-14d3c8163e73") }
             };
+
+            #endregion
 
             //Сгруппируем по комнатам
             var devicesByRooms = initialList.GroupBy(d => d.Room)

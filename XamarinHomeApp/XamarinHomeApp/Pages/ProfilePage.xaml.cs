@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using Xamarin.Essentials;
 using XamarinHomeApp.Models;
+using System.Diagnostics.Tracing;
 
 namespace XamarinHomeApp.Pages
 {
@@ -40,6 +42,12 @@ namespace XamarinHomeApp.Pages
                 App.Current.Properties.Add("CurrentUser", UserInfo);
             }
 
+            // Получим значения ползунков из Preferences.
+            // Если значений нет - установим значения по умолчанию (false)
+            gasSwitch.On = Preferences.Get("gasState", false);
+            climateSwitch.On = Preferences.Get("climateState", false);
+            electroSwitch.On = Preferences.Get("electroState", false);
+
             base.OnAppearing();
         }
 
@@ -58,6 +66,12 @@ namespace XamarinHomeApp.Pages
             UserInfo.Name = loginEntry.Text;
             UserInfo.Email = emailEntry.Text;
 
+            //Сохранение значения полщунков в настройки
+            Preferences.Set("gasState", gasSwitch.On);
+            Preferences.Set("climateState", climateSwitch.On);
+            Preferences.Set("electroState", electroSwitch.On);
+
+            //Возврат на предыдущую страницу
             await Navigation.PopAsync();
         }
     }
