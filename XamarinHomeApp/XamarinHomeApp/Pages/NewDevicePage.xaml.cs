@@ -3,16 +3,34 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using XamarinHomeApp.Models;
 
 namespace XamarinHomeApp.Pages
 {
     public partial class NewDevicePage : ContentPage
     {
-        public NewDevicePage()
+        public static string PageName { get; set; }
+        public static string DeviceName { get; set; }
+        public static string DeviceDescription { get; set; }
+
+        public HomeDevice HomeDevice { get; set; }
+
+        public NewDevicePage(string pageName, HomeDevice homeDevice = null)
         {
+            PageName = pageName;
+
+            if(homeDevice != null)
+            {
+                HomeDevice = homeDevice;
+                DeviceName = homeDevice.Name;
+                DeviceDescription = homeDevice.Description;
+            }
+            else
+                HomeDevice = new HomeDevice();
+
             InitializeComponent();
             OpenEditor();
         }
@@ -24,8 +42,11 @@ namespace XamarinHomeApp.Pages
             {
                 BackgroundColor = Color.AliceBlue,
                 Margin = new Thickness(30, 10),
-                Placeholder = "Название"
+                Placeholder = "Название",
+                Text = DeviceName,
+                Style = (Style)App.Current.Resources["ValidInputStyle"]
             };
+            newDeviceName.TextChanged += (sender, e) => InputTextChanged(sender, e, newDeviceName);
             stackLayout.Children.Add(newDeviceName);
 
             //Создание многострочного поля для описания
@@ -34,8 +55,12 @@ namespace XamarinHomeApp.Pages
                 HeightRequest = 200,
                 BackgroundColor = Color.AliceBlue,
                 Margin = new Thickness(30, 10),
-                Placeholder = "Описание"
+                Placeholder = "Описание",
+                Text = DeviceDescription,
+                Style = (Style)App.Current.Resources["ValidInputStyle"]
+
             };
+            newDeviceDescription.TextChanged += (sender, e) => InputTextChanged(sender, e, newDeviceDescription);
             stackLayout.Children.Add(newDeviceDescription);
 
             //Создадим заголовок для переключателя
@@ -56,20 +81,36 @@ namespace XamarinHomeApp.Pages
                 OnColor = Color.LightSteelBlue
             };
             stackLayout.Children.Add(switchControl);
+            //Регистрируем обработчик события переулючения Switch
+            switchControl.Toggled += (sender, e) => SwitchHandler(sender, e, switchHeader);
 
-            //Создание кнопки
+            //Кнопка сохранения с обработчиками
             var addButton = new Button
             {
-                Text = "Добавить",
+                Text = "Сохранить",
                 Margin = new Thickness(30, 10),
                 BackgroundColor = Color.Silver
             };
+            addButton.Clicked += (sender, e) => 
+                SaveButtonClicked(sender, e, new View[] { newDeviceName, newDeviceDescription, switchControl });
             stackLayout.Children.Add(addButton);
-
-            //Регистрируем обработчик события переулючения Switch
-            switchControl.Toggled += (sender, e) => SwitchHandler(sender, e, switchHeader);
         }
 
+        /// <summary>
+        /// Кнопка сохранения деактивирует все контролы
+        /// </summary>
+        private void SaveButtonClicked(object sender, EventArgs e, View[] views)
+        {
+            foreach(var view in views)
+                view.IsEnabled = false;
+
+            HomeDevice.Name = DeviceName;
+            HomeDevice.Description = DeviceDescription;
+        }
+
+        /// <summary>
+        /// Обработчик переключателя
+        /// </summary>
         private void SwitchHandler(object sender, ToggledEventArgs e, Label header)
         {
             if (!e.Value)
@@ -79,6 +120,14 @@ namespace XamarinHomeApp.Pages
             }
 
             header.Text = "Использует газ";
+        }
+
+        private void InputTextChanged(object sender, TextChangedEventArgs e, InputView view)
+        {
+            if (view is Entry)
+                DeviceName = view.Text;
+            else
+                DeviceDescription = view.Text;
         }
     }
 }

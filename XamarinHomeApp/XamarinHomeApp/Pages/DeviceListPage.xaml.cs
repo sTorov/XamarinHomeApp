@@ -20,6 +20,11 @@ namespace XamarinHomeApp.Pages
         /// </summary>
         public ObservableCollection<Group<string, HomeDevice>> DevicesGroups { get; set; } = new ObservableCollection<Group<string, HomeDevice>>();
 
+        /// <summary>
+        /// Ссылка на выбранный объект
+        /// </summary>
+        private HomeDevice selectedDevice;
+
         public DeviceListPage()
         {
             InitializeComponent();
@@ -60,11 +65,36 @@ namespace XamarinHomeApp.Pages
         /// </summary>
         private void DeviceList_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
-            //распаковка объекта из модели
-            var device = (HomeDevice)e.SelectedItem;
-            //уведомление
-            DisplayAlert("Выбор", $"Вы выбрали {device.Name}, {device.Description}", "ОК");
+            ////распаковка объекта из модели
+            //var device = (HomeDevice)e.SelectedItem;
+            ////уведомление
+            //DisplayAlert("Выбор", $"Вы выбрали {device.Name}, {device.Description}", "ОК");
+            selectedDevice = (HomeDevice)e.SelectedItem;
         }
+
+        /// <summary>
+        /// Переход на следующую страницу - страницу нового устройства (и помещение её в стек навигации)
+        /// </summary>
+        private async void NewDeviceButton_Clicked(object sender, EventArgs e) => await Navigation.PushAsync(new NewDevicePage("Новое устройство"));
+
+        /// <summary>
+        /// Возврат на первую страницу стека навигации (корневую страницу приложения) - экран логина
+        /// </summary>
+        private async void LogoutButton_Clicked(object sender, EventArgs e) => await Navigation.PopAsync();
+
+        private async void EditDeviceButton_Clicked(object sender, EventArgs e) 
+        {
+            // проверяем, выбрал ли пользователь устройство из списка
+            if(selectedDevice == null)
+            {
+                await DisplayAlert(null, $"Пожалуйста, выберите устройство!", "OK");
+                return;
+            }
+            //Переход на следующую страницу - страницу нового устройства (и помещение её в стек навигации)
+            await Navigation.PushAsync(new NewDevicePage("Изменить устройство", selectedDevice));
+        }
+
+        #region ListView_ObservableCollection
 
         /// <summary>
         /// Обработчик добавления устройства
@@ -101,5 +131,7 @@ namespace XamarinHomeApp.Pages
         //        await DisplayAlert(null, $"Устройство {deviceToRemove.Name} удалено", "OK");
         //    }
         //}
+
+        #endregion
     }
 }

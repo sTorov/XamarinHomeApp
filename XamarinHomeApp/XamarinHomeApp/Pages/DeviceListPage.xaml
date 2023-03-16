@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="XamarinHomeApp.Pages.DeviceListPage">
+             x:Class="XamarinHomeApp.Pages.DeviceListPage"
+             NavigationPage.HasNavigationBar="False">
 
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -22,10 +23,12 @@
                   HasUnevenRows="True"
                   ItemsSource="{Binding DevicesGroups}"
                   GroupDisplayBinding="{Binding Name}"
-                    IsGroupingEnabled="True"
-                    SeparatorVisibility="Default"
-                    RowHeight="60">
-            <!--ItemSelected="DeviceList_ItemSelected"-->
+                  IsGroupingEnabled="True"
+                  CachingStrategy="RecycleElement"
+                  SeparatorVisibility="Default"
+                  RowHeight="60"
+                  ItemSelected="DeviceList_ItemSelected">
+            <!--ItSelected="DeviceList_ItemSelected"-->
             <!--ItemTapped="DeviceList_ItemTapped"-->
             <ListView.ItemTemplate>
                 <DataTemplate>
@@ -60,6 +63,7 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+        
         <!--<StackLayout Orientation="Horizontal" 
                      Padding="0,10" 
                      HorizontalOptions="CenterAndExpand">
@@ -68,6 +72,16 @@
             <Button Text="Удалить устройство"
                 Clicked="RemoveDevice"/>
         </StackLayout>-->
+        
+        <!--<Grid ColumnDefinitions="50*, 50*" RowDefinitions="45" Margin="10,15">-->
+        <Grid ColumnDefinitions="Auto" RowDefinitions="45" Margin="10,15">
+            <Button Text="Новое устройство" Grid.Column="0" HorizontalOptions="FillAndExpand"
+                Clicked="NewDeviceButton_Clicked"/>
+            <Button Text="Изменить" Grid.Column="1" HorizontalOptions="FillAndExpand"
+                Clicked="EditDeviceButton_Clicked"/>
+            <Button Text="Выход" Grid.Column="2" HorizontalOptions="FillAndExpand" 
+                Clicked="LogoutButton_Clicked"/>
+        </Grid>
     </StackLayout>
     
 </ContentPage>

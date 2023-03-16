@@ -12,7 +12,7 @@ namespace XamarinHomeApp.Models
         public string Description { get; set; }
         public string Room { get; set; }
 
-        public HomeDevice(string name, string image = null, string description = null, string room = null)
+        public HomeDevice(string name = null, string image = null, string description = null, string room = null)
         {
             Id = Guid.NewGuid();
             Name = name;

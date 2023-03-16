@@ -30,7 +30,7 @@ namespace XamarinHomeApp.Pages
             }
 
             //Изменение внешнего вида кнопки для Desktop-версии
-            if(Device.Idiom == TargetIdiom.Desktop)
+            if (Device.Idiom == TargetIdiom.Desktop)
             {
                 backButton.CornerRadius = 10;
                 backButton.BackgroundColor = Color.Black;
@@ -43,7 +43,7 @@ namespace XamarinHomeApp.Pages
             //Установим динамический ресурс при помощи специального метода (у кода приоритет над разметкой)
             cube.SetDynamicResource(BoxView.BackgroundColorProperty, "commonColor");
         }
-                
+
         /// <summary>
         /// По клику обрабатываем счетчик и выводим разные сообщения
         /// </summary>
@@ -68,7 +68,7 @@ namespace XamarinHomeApp.Pages
 
                 var infoMessage = (Label)stackLayout.Children.Last();   //Получаем последний элемент, используя свойство Children, после выполняем распаковку (можно просто через имя элемента)
                 infoMessage.Text = "Слишком много попыток! Попробуйте позже.";     //Показываем сообщение об ошибке
-                
+
                 #region Color
 
                 //Задание цвета текста при помощи статического метода Color.FromRGB()
@@ -129,5 +129,16 @@ namespace XamarinHomeApp.Pages
         #endregion
 
         private async void BackButton_Clicked(object sender, EventArgs e) => await Navigation.PopAsync();
+
+        private async void Enter_Clicked(object sender, EventArgs e)
+        {
+            loginButton.Text = "Выполняется вход...";
+            //Имитация задержки
+            await System.Threading.Tasks.Task.Delay(1000);
+            //Переход на следующую страницу (страницу списка устройств)
+            await Navigation.PushAsync(new DeviceListPage());
+            //Восстановим первоначальный текст на кнопке, на случае  если пользователь вернётся на страницу для повторного входа
+            loginButton.Text = BUTTON_TEXT;
+        }
     }
 }

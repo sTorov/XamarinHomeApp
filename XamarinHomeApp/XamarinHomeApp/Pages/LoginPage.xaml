@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:XamarinHomeApp.Pages"
              xmlns:ext="clr-namespace:XamarinHomeApp.Templates"
-             x:Class="XamarinHomeApp.Pages.LoginPage">
+             x:Class="XamarinHomeApp.Pages.LoginPage"
+             NavigationPage.HasNavigationBar="False">
     
     <!-- Для использования статических ресурсов во всём приложении, их нужно разместить в App.xaml -->
     
@@ -34,7 +35,8 @@
         <Button x:Name="loginButton" 
                 Text="{x:Static local:LoginPage.BUTTON_TEXT}"
                 CornerRadius="{ext:ButtonView ButtonStyle=Round}"
-                Clicked="LoginButton_Clicked"/>
+                Clicked="Enter_Clicked"/>
+                <!--Clicked="LoginButton_Clicked"-->
         <Button x:Name="backButton" 
                 Text="Назад"
                 CornerRadius="{ext:ButtonView ButtonStyle=Round}"
