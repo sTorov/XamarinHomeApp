@@ -1,21 +1,22 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="XamarinHomeApp.Pages.ProfilePage">
+             x:Class="XamarinHomeApp.Pages.ProfilePage"
+             Title="Ваш профиль">
     <StackLayout>
-        <Label Text="HomeApp - доступ" HorizontalOptions="Center"
-               FontSize="Title" Padding="30,10"/>
+        <!--<Label Text="HomeApp - доступ" HorizontalOptions="Center"
+               FontSize="Title" Padding="30,10"/>-->
         <!-- TableView - пример использования -->
-        <TableView>
+        <TableView x:Name="userDataTable">
             <TableView.Root>
                 <TableRoot>
                     <TableSection Title="Данные пользователя">
                         <EntryCell x:Name="loginEntry" Label="Имя" 
-                                   Keyboard="Default" Text="Андрей"/>
+                                   Keyboard="Default"/>
                         <EntryCell x:Name="emailEntry" Label="E-mail" 
-                                   Keyboard="Default" Text="andrew@homeapp.com"/>
+                                   Keyboard="Default"/>
                     </TableSection>
-                    <TableSection>
+                    <TableSection Title="Настройка доступа">
                         <SwitchCell x:Name="gasSwitch" Text="Управление газом"
                                     OnChanged="NotifyUser" OnColor="RoyalBlue"/>
                         <SwitchCell x:Name="climateSwitch" Text="Управление климатом"
@@ -26,6 +27,8 @@
                 </TableRoot>
             </TableView.Root>
         </TableView>
-        <Button x:Name="saveButton" Text="Сохранить" Margin="10"/>
+        <Button x:Name="saveButton" 
+                Text="Сохранить" Margin="10"
+                Clicked="SaveButton_Clicked"/>
     </StackLayout>
 </ContentPage>

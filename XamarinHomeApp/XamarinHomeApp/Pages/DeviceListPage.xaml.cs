@@ -94,6 +94,8 @@ namespace XamarinHomeApp.Pages
             await Navigation.PushAsync(new NewDevicePage("Изменить устройство", selectedDevice));
         }
 
+        private async void UserProfileButton_Clicked(object sender, EventArgs e) => await Navigation.PushAsync(new ProfilePage());
+
         #region ListView_ObservableCollection
 
         /// <summary>
