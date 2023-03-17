@@ -13,11 +13,17 @@ namespace XamarinHomeApp.Pages
     public partial class NewDevicePage : ContentPage
     {
         public static string PageName { get; set; }
-        public static string DeviceName { get; set; }
-        public static string DeviceDescription { get; set; }
+        public static bool CreateNew { get; set; }
 
+        //public static string DeviceName { get; set; }
+        //public static string DeviceDescription { get; set; }
+
+        //ссылка на модель
         public HomeDevice HomeDevice { get; set; }
 
+        /// <summary>
+        ///  Метод - конструктор принимает данные с предыдущей старницы
+        /// </summary>
         public NewDevicePage(string pageName, HomeDevice homeDevice = null)
         {
             PageName = pageName;
@@ -25,11 +31,15 @@ namespace XamarinHomeApp.Pages
             if(homeDevice != null)
             {
                 HomeDevice = homeDevice;
-                DeviceName = homeDevice.Name;
-                DeviceDescription = homeDevice.Description;
+                CreateNew = false;
+                //DeviceName = homeDevice.Name;
+                //DeviceDescription = homeDevice.Description;
             }
             else
+            {
                 HomeDevice = new HomeDevice();
+                CreateNew = true;
+            }
 
             InitializeComponent();
             OpenEditor();
@@ -43,7 +53,7 @@ namespace XamarinHomeApp.Pages
                 BackgroundColor = Color.AliceBlue,
                 Margin = new Thickness(30, 10),
                 Placeholder = "Название",
-                Text = DeviceName,
+                Text = HomeDevice.Name,
                 Style = (Style)App.Current.Resources["ValidInputStyle"]
             };
             newDeviceName.TextChanged += (sender, e) => InputTextChanged(sender, e, newDeviceName);
@@ -56,33 +66,54 @@ namespace XamarinHomeApp.Pages
                 BackgroundColor = Color.AliceBlue,
                 Margin = new Thickness(30, 10),
                 Placeholder = "Описание",
-                Text = DeviceDescription,
+                Text = HomeDevice.Description,
                 Style = (Style)App.Current.Resources["ValidInputStyle"]
 
             };
             newDeviceDescription.TextChanged += (sender, e) => InputTextChanged(sender, e, newDeviceDescription);
             stackLayout.Children.Add(newDeviceDescription);
 
-            //Создадим заголовок для переключателя
-            var switchHeader = new Label
+            //Выбор комнаты
+            var switchRoomHeader = new Label
             {
-                Text = "Не использует газ",
+                Text = "Выберите комнату подключения",
                 HorizontalOptions = LayoutOptions.Center,
-                Margin = new Thickness(0, 5, 0, 0)
+                Margin = new Thickness(20, 25, 0, 0)
             };
-            stackLayout.Children.Add(switchHeader);
+            stackLayout.Children.Add(switchRoomHeader);
+
+            var roomPicker = new Picker
+            {
+                Margin = new Thickness(30, 0),
+                Items = { "Кухня", "Ванная", "Гостиная" }
+            };
             
-            //Создадим переключатель
-            Switch switchControl = new Switch
-            {
-                IsToggled = false,
-                HorizontalOptions = LayoutOptions.Center,
-                ThumbColor = Color.DodgerBlue,
-                OnColor = Color.LightSteelBlue
-            };
-            stackLayout.Children.Add(switchControl);
-            //Регистрируем обработчик события переулючения Switch
-            switchControl.Toggled += (sender, e) => SwitchHandler(sender, e, switchHeader);
+            roomPicker.SelectedItem = roomPicker.Items
+                .FirstOrDefault(i => i == HomeDevice.Room);
+            roomPicker.SelectedIndexChanged += (sender, e) =>
+                RoomPicker_SelectedIndexChanged(sender, e, roomPicker);
+            stackLayout.Children.Add(roomPicker);
+
+            ////Создадим заголовок для переключателя
+            //var switchHeader = new Label
+            //{
+            //    Text = "Не использует газ",
+            //    HorizontalOptions = LayoutOptions.Center,
+            //    Margin = new Thickness(0, 5, 0, 0)
+            //};
+            //stackLayout.Children.Add(switchHeader);
+
+            ////Создадим переключатель
+            //Switch switchControl = new Switch
+            //{
+            //    IsToggled = false,
+            //    HorizontalOptions = LayoutOptions.Center,
+            //    ThumbColor = Color.DodgerBlue,
+            //    OnColor = Color.LightSteelBlue
+            //};
+            //stackLayout.Children.Add(switchControl);
+            ////Регистрируем обработчик события переулючения Switch
+            //switchControl.Toggled += (sender, e) => SwitchHandler(sender, e, switchHeader);
 
             //Кнопка для перехода на страницу с инструкцией
             var infoButton = new Button
@@ -103,20 +134,51 @@ namespace XamarinHomeApp.Pages
                 BackgroundColor = Color.Silver
             };
             addButton.Clicked += (sender, e) => 
-                SaveButtonClicked(sender, e, new View[] { newDeviceName, newDeviceDescription, switchControl });
+                SaveButtonClicked(sender, e, new View[] { newDeviceName, newDeviceDescription, roomPicker });
             stackLayout.Children.Add(addButton);
         }
 
         /// <summary>
         /// Кнопка сохранения деактивирует все контролы
         /// </summary>
-        private void SaveButtonClicked(object sender, EventArgs e, View[] views)
+        private async void SaveButtonClicked(object sender, EventArgs e, View[] views)
         {
+            if (string.IsNullOrEmpty(HomeDevice.Room))
+            {
+                await DisplayAlert("Выберите комнату", $"Комната подключения не выбрана!", "ОК");
+                return;
+            }
+
+            //деактивируем все контролы
             foreach(var view in views)
                 view.IsEnabled = false;
 
-            HomeDevice.Name = DeviceName;
-            HomeDevice.Description = DeviceDescription;
+            //HomeDevice.Name = DeviceName;
+            //HomeDevice.Description = DeviceDescription;
+
+            if (CreateNew)
+            {
+                // Если нужно создать новое - то сначала выполним проверку, не существует ли ещё такое.
+                var existingDevices = await App.HomeDevices.GetHomeDevices();
+                if(existingDevices.Any(d => d.Name == HomeDevice.Name))
+                    await DisplayAlert("Ошибка", $"Устройство {HomeDevice.Name} уже подключено.\nВыберите другое имя.", "ОК");
+                else
+                {
+                    var newDeviceDto = App.Mapper.Map<Data.Tables.HomeDevice>(HomeDevice);
+                    await App.HomeDevices.AddHomeDevice(newDeviceDto);
+
+                    // Пример другого способа навигации - с помощью удаления предыдущей страницы из стека и "вставки" (дано для демонстрации возможностей)
+                    Navigation.RemovePage(Navigation.NavigationStack[Navigation.NavigationStack.Count - 2]);
+                    Navigation.InsertPageBefore(new DeviceListPage(), this);
+                    await Navigation.PopAsync();
+                }
+
+                return;
+            }
+
+            var updatedDevice = App.Mapper.Map<Data.Tables.HomeDevice>(HomeDevice);
+            await App.HomeDevices.UpdateHomeDevice(updatedDevice);
+            await Navigation.PopAsync();
         }
 
         /// <summary>
@@ -136,14 +198,19 @@ namespace XamarinHomeApp.Pages
         private void InputTextChanged(object sender, TextChangedEventArgs e, InputView view)
         {
             if (view is Entry)
-                DeviceName = view.Text;
+                HomeDevice.Name = view.Text;
             else
-                DeviceDescription = view.Text;
+                HomeDevice.Description = view.Text;
         }
 
         private async void ManualButtonClicked(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new DeviceManualPage(HomeDevice.Name, HomeDevice.Id));
+        }
+
+        private void RoomPicker_SelectedIndexChanged(object sender, EventArgs e, Picker picker)
+        {
+            HomeDevice.Room = picker.Items[picker.SelectedIndex];
         }
     }
 }
