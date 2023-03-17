@@ -84,6 +84,17 @@ namespace XamarinHomeApp.Pages
             //Регистрируем обработчик события переулючения Switch
             switchControl.Toggled += (sender, e) => SwitchHandler(sender, e, switchHeader);
 
+            //Кнопка для перехода на страницу с инструкцией
+            var infoButton = new Button
+            {
+                Text = "Инструкция по эксплуатации",
+                Margin = new Thickness(30, 10),
+                BackgroundColor = Color.Silver
+            };
+            infoButton.Clicked += (sender, e) => ManualButtonClicked(sender, e);
+            stackLayout.Children.Add(infoButton);
+
+
             //Кнопка сохранения с обработчиками
             var addButton = new Button
             {
@@ -128,6 +139,11 @@ namespace XamarinHomeApp.Pages
                 DeviceName = view.Text;
             else
                 DeviceDescription = view.Text;
+        }
+
+        private async void ManualButtonClicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new DeviceManualPage(HomeDevice.Name, HomeDevice.Id));
         }
     }
 }
