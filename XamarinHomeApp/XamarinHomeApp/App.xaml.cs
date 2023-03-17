@@ -14,7 +14,7 @@ namespace XamarinHomeApp
         public static HomeDeviceRepository HomeDevices = new HomeDeviceRepository(
                 Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
                     $"homedevices.db"));
-        public IMapper Mapper { get; set; }
+        public static IMapper Mapper { get; set; }
 
         public App()
         {
@@ -29,7 +29,7 @@ namespace XamarinHomeApp
         /// <summary>
         /// Создаём автомаппер для преобразования сущностей
         /// </summary>
-        private IMapper CreateMapper()
+        private static IMapper CreateMapper()
         {
             var config = new MapperConfiguration(cfg =>
             {

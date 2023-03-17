@@ -76,13 +76,15 @@
         
         <!--<Grid ColumnDefinitions="50*, 50*" RowDefinitions="45" Margin="10,15">-->
         <Grid ColumnDefinitions="Auto" RowDefinitions="45" Margin="10,15">
-            <Button Text="👤Профиль" Grid.Column="0" HorizontalOptions="FillAndExpand"
+            <Button Text="👤Profile" Grid.Column="0" HorizontalOptions="FillAndExpand"
                 Clicked="UserProfileButton_Clicked"/>
-            <Button Text="Новое" Grid.Column="1" HorizontalOptions="FillAndExpand"
+            <Button Text="New" Grid.Column="1" HorizontalOptions="FillAndExpand"
                 Clicked="NewDeviceButton_Clicked"/>
-            <Button Text="Изм." Grid.Column="2" HorizontalOptions="FillAndExpand"
+            <Button Text="✏️" Grid.Column="2" HorizontalOptions="FillAndExpand"
                 Clicked="EditDeviceButton_Clicked"/>
-            <Button Text="Выход" Grid.Column="3" HorizontalOptions="FillAndExpand" 
+            <Button Text="✖" TextColor="Red" FontSize="13" Grid.Column="3" HorizontalOptions="FillAndExpand"
+                Clicked="DeleteButton_Clicked"/>
+            <Button Text="Exit" Grid.Column="4" HorizontalOptions="FillAndExpand" 
                 Clicked="LogoutButton_Clicked"/>
         </Grid>
     </StackLayout>
